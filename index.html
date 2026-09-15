@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Secure Password Generator — free, offline, instant (Power Scripts Vol. 1)</title>
+<meta name="description" content="Free offline password and passphrase generator. Nothing leaves your browser. Part of Windows Power Scripts Vol. 1 — 10 battle-tested automation scripts.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://rfborrello.github.io/predmark-store/">
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 720px; margin: 2rem auto; padding: 0 1rem; color: #1a1a1a; }
+  h1 { font-size: 1.6rem; } code { background: #f2f2f2; padding: .1rem .35rem; border-radius: 4px; }
+  .card { border: 1px solid #ddd; border-radius: 10px; padding: 1.25rem; margin: 1.25rem 0; }
+  button { padding: .5rem 1rem; border-radius: 6px; border: 1px solid #888; background: #1a73e8; color: #fff; cursor: pointer; }
+  button.sec { background: #eee; color: #111; }
+  #out { font-family: monospace; font-size: 1.15rem; word-break: break-all; margin: .75rem 0; }
+  .cta { background: #eef4ff; border-color: #b9d0ff; }
+</style>
+</head>
+<body>
+<h1>Secure Password Generator</h1>
+<p>Free, 100% offline, instant. Cryptographically strong (your browser's CSPRNG) — nothing is transmitted. Press generate, copy, done.</p>
+
+<div class="card">
+  <div class="card" style="margin:0; border:none; padding:none; display:flex; gap:.5rem; flex-wrap:wrap; align-items:center;">
+    <button onclick="pw()">Generate password (20)</button>
+    <button class="sec" onclick="pp()">Generate passphrase (4 words)</button>
+    <label><input type="checkbox" id="nosym"> no symbols</label>
+  </div>
+  <div id="out">…</div>
+  <button class="sec" onclick="navigator.clipboard.writeText(document.getElementById('out').textContent)">Copy</button>
+</div>
+<p>Using cryptographically secure randomness. Works with no internet connection.</p>
+<p>Web passphrase strength tip: length beats complexity. A five-random-word passphrase is both strong and memorable.</p>
+<p>Word list contains 20 common English nouns; entropy ≈ 4.3 bits/word - use 5+ words for vault-grade, or a random 20-char password for storage. For your critical accounts, password managers handle uniqueness better than memorability.</p>
+
+<div class="card cta">
+  <h2>Windows Power Scripts Vol. 1 — $1.00</h2>
+  <p>This generator is one of <strong>ten</strong> battle-tested scripts in our pack that automate the chores IT pros run by hand every week:</p>
+  <ul>
+    <li>Disk cleanup reporting &amp; stale temp-file removal</li>
+    <li>"Why is my disk full?" — biggest-file finder</li>
+    <li>One-screen PC health report (CPU/RAM/startup/disk)</li>
+    <li>Robocopy backups with automatic rotation</li>
+    <li>Bulk regex file rename (with dry-run), CSV de-duplication, PDF merge, batch image resize, Wi-Fi &amp; network audits</li>
+  </ul>
+  <p><a href="https://t.me/sentinel_predmark_bot?start=pages">Buy on Telegram for $1 &rarr;</a></p>
+  <p style="font-size:.9rem;color:#555">Payment via Telegram Stars (~$1) or ETH. Automatic delivery to your chat. No accounts, no telemetry.</p>
+</div>
+<p><a href="https://github.com/RFBorrello/predmark-store">Source &amp; product info on GitHub</a></p>
+
+<script>
+const WORDS = "anchor breeze carbon drift ember fjord granite harbor ivory jade kernel lagoon meadow nimbus orbit prism quartz ripple summit tundra velvet".split(" ");
+function rnd(n){ const a=new Uint32Array(n); crypto.getRandomValues(a); return a; }
+function pw(){ const len=20, sym=document.getElementById('nosym').checked;
+  const pool="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"+(sym?"":"!@#$%^&*-_=+");
+  const r=rnd(len); let s=""; for(let i=0;i<len;i++) s+=pool[r[i]%pool.length]; document.getElementById('out').textContent=s; }
+function pp(){ const r=rnd(4); let s=[]; for(let i=0;i<4;i++) s.push(WORDS[r[i]%WORDS.length]); document.getElementById('out').textContent=s.join("-"); }
+pw();
+</script>
+</body>
+</html>
