@@ -24,6 +24,10 @@ Plus: **password_gen.py** (secure passwords/passphrases) and **subnet_scan.py** 
 
 No installs. No telemetry. No accounts. Everything runs locally.
 
+## Free samples
+
+Try 3 of the scripts for free in [free/](free/) before buying.
+
 ## How to buy
 
 1. Open Telegram: [@sentinel_predmark_bot](https://t.me/sentinel_predmark_bot)
